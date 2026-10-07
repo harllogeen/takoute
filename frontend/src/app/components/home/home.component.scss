@@ -1407,7 +1407,7 @@
   /* ---- Hero ---- */
   .hero-section {
     min-height: auto;
-    padding: 2rem 0 3.5rem;
+    padding: 2rem 0 0;
   }
 
   .hero-content {
@@ -1460,11 +1460,12 @@
   .hero-image {
     display: flex !important;
     justify-content: center;
+    padding-bottom: 2rem;
   }
 
   .hero-image-frame {
-    width: 220px !important;
-    height: 220px !important;
+    width: 260px !important;
+    height: 260px !important;
   }
 
   .hero-badge,
@@ -1647,7 +1648,7 @@
   .hero-text .hero-title { font-size: 2rem; }
 
   .hero-image-frame {
-    width: 180px !important;
-    height: 180px !important;
+    width: 200px !important;
+    height: 200px !important;
   }
 }
