@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import prisma from '../config/database';
 import { createFoodSchema, updateFoodSchema } from '../utils/validation';
 
-export const getFoods = async (req: Request, res: Response, next: NextFunction) => {
+export const getFoods = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { category, categoryId, available, search, page = '1', limit = '20' } = req.query;
 
@@ -10,9 +10,9 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction) 
     const limitNum = parseInt(limit as string);
     const skip = (pageNum - 1) * limitNum;
 
-    let where: any = {};
+    // Build Prisma where clause — works on both SQLite and PostgreSQL
+    const where: any = {};
 
-    // Support both 'category' and 'categoryId' parameters
     if (category) {
       where.categoryId = category;
     } else if (categoryId) {
@@ -23,83 +23,28 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction) 
       where.isAvailable = true;
     }
 
-    // For search, we need to handle case-insensitive search for SQLite
-    let foods;
-    let total;
-
     if (search && (search as string).trim() !== '') {
-      const searchTerm = `%${(search as string).toLowerCase()}%`;
-      
-      // Build WHERE clause for SQL
-      let sqlWhere = 'WHERE (LOWER(name) LIKE ? OR LOWER(description) LIKE ?)';
-      const params: any[] = [searchTerm, searchTerm];
-      
-      if (where.categoryId) {
-        sqlWhere += ' AND categoryId = ?';
-        params.push(where.categoryId);
-      }
-      
-      if (where.isAvailable !== undefined) {
-        sqlWhere += ' AND isAvailable = ?';
-        params.push(where.isAvailable ? 1 : 0);
-      }
-
-      // Get foods with search
-      const rawFoods: any[] = await prisma.$queryRawUnsafe(
-        `SELECT * FROM food_items ${sqlWhere} ORDER BY name ASC LIMIT ? OFFSET ?`,
-        ...params,
-        limitNum,
-        skip
-      );
-
-      // Get count
-      const countResult: any[] = await prisma.$queryRawUnsafe(
-        `SELECT COUNT(*) as count FROM food_items ${sqlWhere}`,
-        ...params
-      );
-      
-      total = Number(countResult[0].count);
-
-      // Get categories for the foods
-      const foodIds = rawFoods.map(f => f.id);
-      const categories = foodIds.length > 0 ? await prisma.category.findMany({
-        where: {
-          id: {
-            in: rawFoods.map(f => f.categoryId)
-          }
-        },
-        select: {
-          id: true,
-          name: true
-        }
-      }) : [];
-
-      // Attach categories to foods
-      foods = rawFoods.map(food => ({
-        ...food,
-        category: categories.find(c => c.id === food.categoryId)
-      }));
-    } else {
-      // No search, use regular Prisma query
-      [foods, total] = await Promise.all([
-        prisma.foodItem.findMany({
-          where,
-          include: {
-            category: {
-              select: {
-                id: true,
-                name: true
-              }
-            }
-          },
-          skip,
-          take: limitNum,
-          orderBy: { name: 'asc' }
-        }),
-        prisma.foodItem.count({ where })
-      ]);
+      const searchTerm = (search as string).trim();
+      where.OR = [
+        { name:        { contains: searchTerm, mode: 'insensitive' } },
+        { description: { contains: searchTerm, mode: 'insensitive' } }
+      ];
     }
 
+    const [foods, total] = await Promise.all([
+      prisma.foodItem.findMany({
+        where,
+        include: {
+          category: { select: { id: true, name: true } }
+        },
+        skip,
+        take: limitNum,
+        orderBy: { name: 'asc' }
+      }),
+      prisma.foodItem.count({ where })
+    ]);
+
+      // Get categories for the foods
     res.status(200).json({
       success: true,
       data: {
