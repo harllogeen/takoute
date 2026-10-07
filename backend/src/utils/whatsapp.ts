@@ -47,7 +47,7 @@ ${orderData.paymentMethod.replace('_', ' ')}
 Please confirm this order. Thank you! 🙏`;
 
   // Format WhatsApp URL
-  const whatsappNumber = process.env.WHATSAPP_BUSINESS_NUMBER || '2348012345678';
+  const whatsappNumber = process.env.WHATSAPP_BUSINESS_NUMBER || '2349033215001';
   const cleanNumber = whatsappNumber.replace(/\D/g, '');
   const formattedNumber = cleanNumber.startsWith('234') 
     ? cleanNumber 
