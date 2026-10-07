@@ -3,6 +3,12 @@ import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
+// Image base URL — uses env var in production, local path in dev
+const IMG = (path: string) => {
+  const base = process.env.ASSETS_BASE_URL || '';
+  return `${base}${path}`;
+};
+
 async function main() {
   console.log('🌱 Starting database seeding...');
 
@@ -109,7 +115,7 @@ async function main() {
       name: 'Jollof Rice & Fish',
       description: 'Delicious Nigerian jollof rice with grilled fish',
       price: 4500,
-      imageUrl: '/assets/images/jollof-rice.jpg',
+      imageUrl: IMG('/assets/images/jollof-rice.jpg'),
       categoryId: riceCategory.id,
       isAvailable: true
     },
@@ -117,7 +123,7 @@ async function main() {
       name: 'Ofada Rice Special',
       description: 'Traditional Nigerian Ofada rice served with spicy ayamase sauce',
       price: 4000,
-      imageUrl: '/assets/images/ofada-rice-and-sauce.jpeg',
+      imageUrl: IMG('/assets/images/ofada-rice-and-sauce.jpeg'),
       categoryId: riceCategory.id,
       isAvailable: true
     },
@@ -125,7 +131,7 @@ async function main() {
       name: 'Ofada Rice and Stew',
       description: 'Premium Ofada rice with assorted meat and ponmo',
       price: 5000,
-      imageUrl: '/assets/images/offada-rice.jpg',
+      imageUrl: IMG('/assets/images/offada-rice.jpg'),
       categoryId: riceCategory.id,
       isAvailable: true
     },
@@ -167,7 +173,7 @@ async function main() {
       name: 'Fried Chicken',
       description: 'Crispy fried chicken',
       price: 3000,
-      imageUrl: '/assets/images/fried-chicken.jpg',
+      imageUrl: IMG('/assets/images/fried-chicken.jpg'),
       categoryId: chickenCategory.id,
       isAvailable: true
     },
@@ -175,7 +181,7 @@ async function main() {
       name: 'Chicken & Chips',
       description: 'Crispy fried chicken served with chips',
       price: 3800,
-      imageUrl: '/assets/images/coconut-rice.jpg',
+      imageUrl: IMG('/assets/images/coconut-rice.jpg'),
       categoryId: chickenCategory.id,
       isAvailable: true
     },
@@ -184,7 +190,7 @@ async function main() {
       name: 'Pounded Yam & Vegetable Soup',
       description: 'Nigerian swallow - smooth pounded yam served with vegetable soup',
       price: 4500,
-      imageUrl: '/assets/images/pounded-yam-and-egusi.jpg',
+      imageUrl: IMG('/assets/images/pounded-yam-and-egusi.jpg'),
       categoryId: swallowCategory.id,
       isAvailable: true
     },
@@ -192,7 +198,7 @@ async function main() {
       name: 'Spaghetti',
       description: 'Delicious spaghetti cooked Nigerian style',
       price: 1500,
-      imageUrl: '/assets/images/eba.jpg',
+      imageUrl: IMG('/assets/images/eba.jpg'),
       categoryId: swallowCategory.id,
       isAvailable: true
     },
@@ -209,7 +215,7 @@ async function main() {
       name: 'Egusi Soup',
       description: 'Rich egusi soup with assorted meat',
       price: 3500,
-      imageUrl: '/assets/images/Egusi-Soup.jpg',
+      imageUrl: IMG('/assets/images/Egusi-Soup.jpg'),
       categoryId: soupCategory.id,
       isAvailable: true
     },
@@ -217,7 +223,7 @@ async function main() {
       name: 'Efo Riro',
       description: 'Vegetable soup with locust beans',
       price: 7000,
-      imageUrl: '/assets/images/Efo-Riro1.jpg',
+      imageUrl: IMG('/assets/images/Efo-Riro1.jpg'),
       categoryId: soupCategory.id,
       isAvailable: true
     },
@@ -225,7 +231,7 @@ async function main() {
       name: 'Banga Soup',
       description: 'Palm nut soup',
       price: 3200,
-      imageUrl: '/assets/images/Banga_Soup_Recipe_benczv.webp',
+      imageUrl: IMG('/assets/images/Banga_Soup_Recipe_benczv.webp'),
       categoryId: soupCategory.id,
       isAvailable: true
     },
@@ -234,7 +240,7 @@ async function main() {
       name: 'Coca Cola (Big)',
       description: 'Chilled Coca Cola soft drink - 60cl bottle',
       price: 600,
-      imageUrl: '/assets/images/png-clipart-coca-cola-coca-cola.png',
+      imageUrl: IMG('/assets/images/png-clipart-coca-cola-coca-cola.png'),
       categoryId: drinksCategory.id,
       isAvailable: true
     },
@@ -242,7 +248,7 @@ async function main() {
       name: 'Coca Cola (Small)',
       description: 'Chilled Coca Cola soft drink - 35cl bottle',
       price: 500,
-      imageUrl: '/assets/images/Coke-Transparent.png',
+      imageUrl: IMG('/assets/images/Coke-Transparent.png'),
       categoryId: drinksCategory.id,
       isAvailable: true
     },
@@ -250,7 +256,7 @@ async function main() {
       name: 'Fanta (Big)',
       description: 'Chilled Fanta Orange soft drink - 60cl bottle',
       price: 600,
-      imageUrl: '/assets/images/png-transparent-fanta-can.png',
+      imageUrl: IMG('/assets/images/png-transparent-fanta-can.png'),
       categoryId: drinksCategory.id,
       isAvailable: true
     },
@@ -258,7 +264,7 @@ async function main() {
       name: 'Fanta (Small)',
       description: 'Chilled Fanta Orange soft drink - 35cl bottle',
       price: 500,
-      imageUrl: '/assets/images/fanta_PNG30.png',
+      imageUrl: IMG('/assets/images/fanta_PNG30.png'),
       categoryId: drinksCategory.id,
       isAvailable: true
     },
@@ -266,7 +272,7 @@ async function main() {
       name: 'Sprite',
       description: 'Chilled Sprite lemon-lime drink',
       price: 500,
-      imageUrl: '/assets/images/Sprite-24.png',
+      imageUrl: IMG('/assets/images/Sprite-24.png'),
       categoryId: drinksCategory.id,
       isAvailable: true
     },
@@ -274,7 +280,7 @@ async function main() {
       name: 'Bottled Water',
       description: 'Eva bottled water - refreshing drink',
       price: 300,
-      imageUrl: '/assets/images/alles-water-4998513_1920.png',
+      imageUrl: IMG('/assets/images/alles-water-4998513_1920.png'),
       categoryId: drinksCategory.id,
       isAvailable: true
     },

@@ -1,10 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
 
-# Environment
+# Environment - NEVER commit secrets
 .env
 .env.local
 .env.*.local
@@ -32,3 +29,10 @@ coverage/
 # Misc
 *.tsbuildinfo
 .cache/
+
+# SQLite - local DB only, not for production
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+
+# Angular cache
+frontend/.angular/

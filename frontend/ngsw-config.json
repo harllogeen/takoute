@@ -30,7 +30,10 @@
   "dataGroups": [
     {
       "name": "api-foods",
-      "urls": ["http://localhost:3000/api/foods**"],
+      "urls": [
+        "http://localhost:3000/api/foods**",
+        "https://*.railway.app/api/foods**"
+      ],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "1h",
@@ -40,7 +43,10 @@
     },
     {
       "name": "api-categories",
-      "urls": ["http://localhost:3000/api/categories**"],
+      "urls": [
+        "http://localhost:3000/api/categories**",
+        "https://*.railway.app/api/categories**"
+      ],
       "cacheConfig": {
         "maxSize": 20,
         "maxAge": "6h",

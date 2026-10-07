@@ -1,11 +1,11 @@
-// Prisma Schema for ChopNow Food Ordering App - SQLite Version
+// Prisma Schema for Takeoute Food Ordering App - PostgreSQL Version
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

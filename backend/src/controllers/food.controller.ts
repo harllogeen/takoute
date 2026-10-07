@@ -117,33 +117,21 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-export const getFoodById = async (req: Request, res: Response, next: NextFunction) => {
+export const getFoodById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params;
 
     const food = await prisma.foodItem.findUnique({
       where: { id },
-      include: {
-        category: {
-          select: {
-            id: true,
-            name: true
-          }
-        }
-      }
+      include: { category: { select: { id: true, name: true } } }
     });
 
     if (!food) {
-      return res.status(404).json({
-        success: false,
-        error: 'Food item not found'
-      });
+      res.status(404).json({ success: false, error: 'Food item not found' });
+      return;
     }
 
-    res.status(200).json({
-      success: true,
-      data: food
-    });
+    res.status(200).json({ success: true, data: food });
   } catch (error) {
     next(error);
   }

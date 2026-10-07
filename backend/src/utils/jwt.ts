@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken';
-import { UserRole } from '@prisma/client';
 
 interface TokenPayload {
   id: string;
   email: string;
-  role: UserRole;
+  role: string;
 }
 
 export const generateToken = (payload: TokenPayload): string => {
@@ -16,7 +15,7 @@ export const generateToken = (payload: TokenPayload): string => {
   }
 
   return jwt.sign(payload, jwtSecret, {
-    expiresIn: jwtExpiresIn
+    expiresIn: jwtExpiresIn as jwt.SignOptions['expiresIn']
   });
 };
 

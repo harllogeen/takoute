@@ -25,30 +25,21 @@ export const getCategories = async (req: Request, res: Response, next: NextFunct
   }
 };
 
-export const getCategoryById = async (req: Request, res: Response, next: NextFunction) => {
+export const getCategoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params;
 
     const category = await prisma.category.findUnique({
       where: { id },
-      include: {
-        _count: {
-          select: { foodItems: true }
-        }
-      }
+      include: { _count: { select: { foodItems: true } } }
     });
 
     if (!category) {
-      return res.status(404).json({
-        success: false,
-        error: 'Category not found'
-      });
+      res.status(404).json({ success: false, error: 'Category not found' });
+      return;
     }
 
-    res.status(200).json({
-      success: true,
-      data: category
-    });
+    res.status(200).json({ success: true, data: category });
   } catch (error) {
     next(error);
   }

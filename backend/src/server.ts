@@ -49,7 +49,7 @@ app.use('/assets', express.static(frontendAssetsPath));
 console.log('📁 Serving frontend assets from:', frontendAssetsPath);
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.status(200).json({
     success: true,
     message: 'ChopNow API is running',

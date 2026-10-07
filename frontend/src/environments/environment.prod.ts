@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://192.168.68.101:3000/api',
+  apiUrl: 'https://YOUR-BACKEND.railway.app/api', // 👈 replace with your Railway URL
   whatsappBusinessNumber: '2348012345678',
   appName: 'Takeoute',
   version: '1.0.0'
