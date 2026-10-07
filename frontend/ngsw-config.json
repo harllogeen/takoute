@@ -32,7 +32,7 @@
       "name": "api-foods",
       "urls": [
         "http://localhost:3000/api/foods**",
-        "https://*.railway.app/api/foods**"
+        "https://takoute-production.up.railway.app/api/foods**"
       ],
       "cacheConfig": {
         "maxSize": 100,
@@ -45,7 +45,7 @@
       "name": "api-categories",
       "urls": [
         "http://localhost:3000/api/categories**",
-        "https://*.railway.app/api/categories**"
+        "https://takoute-production.up.railway.app/api/categories**"
       ],
       "cacheConfig": {
         "maxSize": 20,
