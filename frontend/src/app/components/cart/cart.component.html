@@ -1,0 +1,97 @@
+<div class="cart-container">
+  <div class="container">
+    <h1 class="page-title">Shopping Cart</h1>
+
+    <!-- Empty Cart State -->
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <h2>Your cart is empty</h2>
+      <p>Add items to get started</p>
+      <button class="continue-btn" (click)="continueShopping()">
+        Browse Menu
+      </button>
+    </div>
+
+    <!-- Cart Items -->
+    <div *ngIf="cartItems.length > 0" class="cart-content">
+      <div class="cart-items">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          <img [src]="getImageUrl(item)" [alt]="item.food.name" class="item-image" />
+          
+          <div class="item-details">
+            <h3 class="item-name">{{ item.food.name }}</h3>
+            <p class="item-description">{{ item.food.description }}</p>
+            <p class="item-price">₦{{ item.food.price | number }}</p>
+          </div>
+
+          <div class="item-actions">
+            <div class="quantity-controls">
+              <button 
+                class="qty-btn" 
+                (click)="updateQuantity(item.food.id, item.quantity - 1)"
+                [disabled]="item.quantity <= 1"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <span class="quantity">{{ item.quantity }}</span>
+              <button 
+                class="qty-btn" 
+                (click)="updateQuantity(item.food.id, item.quantity + 1)"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+            
+            <div class="item-total">
+              ₦{{ (item.food.price * item.quantity) | number }}
+            </div>
+
+            <button 
+              class="remove-btn" 
+              (click)="removeItem(item.food.id)"
+              aria-label="Remove item"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <h2>Order Summary</h2>
+        
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₦{{ total | number }}</span>
+        </div>
+        
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span class="free-delivery">Free</span>
+        </div>
+        
+        <div class="summary-divider"></div>
+        
+        <div class="total-row">
+          <span>Total</span>
+          <span>₦{{ total | number }}</span>
+        </div>
+
+        <button class="checkout-btn" (click)="proceedToCheckout()">
+          Proceed to Checkout
+        </button>
+        
+        <button class="continue-shopping-btn" (click)="continueShopping()">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

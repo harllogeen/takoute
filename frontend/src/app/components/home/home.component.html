@@ -1,0 +1,352 @@
+<div class="home-container">
+  <!-- Hero Section with Video Background -->
+  <section class="hero-section">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="assets/videos/nigerian-food.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+    
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+
+          <!-- Top pill badge -->
+          <div class="hero-pill">
+            <span class="pill-dot"></span>
+            🔥 Nigeria's Favourite Takeoute
+          </div>
+
+          <h1 class="hero-title">
+            <span class="title-line-1">Delicious Food,</span>
+            <span class="title-line-2">Ready for <span class="text-orange text-highlight">Takeoute</span></span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Order your favourite meals for pickup and enjoy 
+            <span class="subtitle-highlight">great food</span>, anytime.
+          </p>
+
+          <!-- Stats row -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-value">25+</span>
+              <span class="stat-label">Menu Items</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-value">4.9★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-value">15 min</span>
+              <span class="stat-label">Pickup Ready</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-orange btn-lg" (click)="orderTakeout()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"></path>
+                <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"></path>
+                <path d="M12 3v6"></path>
+              </svg>
+              Order Takeout
+            </button>
+            <button class="btn btn-outline-white btn-lg" (click)="viewMenu()">
+              View Menu
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+
+        <div class="hero-image">
+          <div class="hero-image-frame">
+            <div class="hero-image-ring ring-1"></div>
+            <div class="hero-image-ring ring-2"></div>
+            <div class="hero-image-ring ring-3"></div>
+            <img src="assets/images/ofada-rice-and-sauce.jpeg" alt="Ofada Rice & Sauce" class="hero-food-img" />
+            <div class="hero-img-glow"></div>
+          </div>
+
+          <!-- Floating badge top right -->
+          <div class="hero-badge badge-top-right">
+            <span class="badge-emoji">⭐</span>
+            <div class="badge-info">
+              <span class="badge-value">4.9</span>
+              <span class="badge-label">Top Rated</span>
+            </div>
+          </div>
+
+          <!-- Floating badge bottom left -->
+          <div class="hero-badge badge-bottom-left">
+            <span class="badge-emoji">🛵</span>
+            <div class="badge-info">
+              <span class="badge-value">Takeout</span>
+              <span class="badge-label">Ready in 15 min</span>
+            </div>
+          </div>
+
+          <!-- Floating food tag -->
+          <div class="hero-food-tag">
+            🍛 Ofada Rice
+          </div>
+
+          <!-- Decorative dots -->
+          <div class="deco-dot dot-1"></div>
+          <div class="deco-dot dot-2"></div>
+          <div class="deco-dot dot-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll down indicator -->
+    <div class="scroll-indicator" (click)="scrollToMenu()">
+      <span>Scroll to menu</span>
+      <div class="scroll-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+
+  </section>
+  <section class="search-section">
+    <div class="container">
+      <div class="search-wrapper">
+        <div class="search-box">          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input 
+            type="text" 
+            placeholder="Search for meals..." 
+            (input)="onSearch($event)"
+            class="search-input"
+          />
+        </div>
+
+        <!-- Category Filter Chips -->
+        <div class="category-chips">
+          <button 
+            class="chip"
+            [class.active]="selectedCategory === ''"
+            (click)="filterByCategory('')"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            All
+          </button>
+          <button class="chip" (click)="filterByTag('rice')" [class.active]="searchTerm === 'rice'">🍚 Rice</button>
+          <button class="chip" (click)="filterByTag('chicken')" [class.active]="searchTerm === 'chicken'">🍗 Chicken</button>
+          <button class="chip" (click)="filterBySoupCategory()" [class.active]="isSoupActive()">🍲 Soup</button>
+          <button class="chip" (click)="filterByTag('drink')" [class.active]="searchTerm === 'drink' || searchTerm === 'drinks'">🥤 Drinks</button>
+          <button class="chip" (click)="filterBySwallowCategory()" [class.active]="isSwallowActive()">🫕 Swallow</button>
+        </div>
+
+    
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-section">
+    <div class="container">
+
+      <!-- Animated food loader -->
+      <div class="food-loader-wrapper">
+        <div class="food-loader-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="plate-svg">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border-color)" stroke-width="4"/>
+            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#loaderGradient)" stroke-width="4"
+              stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" class="plate-arc"/>
+            <defs>
+              <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--primary-green)"/>
+                <stop offset="100%" stop-color="var(--primary-orange)"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="loader-emoji">🍽️</div>
+        </div>
+        <h3 class="loader-title">Preparing your menu...</h3>
+        <p class="loader-subtitle">Fetching fresh meals just for you</p>
+        <div class="loader-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Skeleton cards -->
+      <div class="skeleton-grid">
+        <div class="skeleton-card" *ngFor="let item of [1,2,3,4,5,6]">
+          <div class="skeleton-image shimmer"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line long shimmer"></div>
+            <div class="skeleton-line medium shimmer"></div>
+            <div class="skeleton-footer">
+              <div class="skeleton-price shimmer"></div>
+              <div class="skeleton-btn shimmer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-section">
+    <div class="container">
+      <div class="error-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h3>Oops! Something went wrong</h3>
+        <p class="error-message">{{ error }}</p>
+        <button class="btn btn-primary" (click)="loadFoods()">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular for Takeout Section -->
+  <section *ngIf="!loading && !error" class="menu-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span *ngIf="!selectedCategory && !searchTerm">Popular</span>
+            <span *ngIf="selectedCategory">{{ getCategoryName() }}</span>
+            <span *ngIf="searchTerm && !selectedCategory">Search Results</span>
+          </h2>
+          <p class="section-subtitle">
+            {{ getAvailableFoods().length }} {{ getAvailableFoods().length === 1 ? 'item' : 'items' }} 
+            <span *ngIf="selectedCategory || searchTerm">found</span>
+            <span *ngIf="!selectedCategory && !searchTerm">available</span>
+            <span *ngIf="searchTerm" class="search-query"> for "{{ searchTerm }}"</span>
+          </p>
+        </div>
+        <a *ngIf="selectedCategory || searchTerm" class="view-all-link" (click)="viewAllMeals()">
+          Clear Filters
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </a>
+        <a *ngIf="!selectedCategory && !searchTerm" class="view-all-link" (click)="viewAllMeals()">
+          View All
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Food Grid -->
+      <div class="food-grid">
+        <div *ngFor="let food of getAvailableFoods(); let i = index" class="food-card" [attr.data-drink]="getDrinkType(food)">
+          <div class="food-image-wrapper">
+            <img [src]="getImageUrl(food)" [alt]="food.name" class="food-image" />
+            <span class="availability-badge" [class.available]="food.isAvailable">
+              {{ food.isAvailable ? '✓ Available' : 'Sold Out' }}
+            </span>
+            <span *ngIf="i < 3" class="popular-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              Popular
+            </span>
+          </div>
+          
+          <div class="food-details">
+            <h3 class="food-title">{{ food.name }}</h3>
+            <p class="food-description">{{ food.description }}</p>
+            
+            <div class="food-footer">
+              <div class="price-wrapper">
+                <span class="currency">₦</span>
+                <span class="price">{{ food.price | number:'1.0-0' }}</span>
+              </div>
+              <button 
+                class="add-to-cart-btn"
+                [disabled]="!food.isAvailable"
+                (click)="addToCart(food)"
+                [class.disabled]="!food.isAvailable"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="getAvailableFoods().length === 0 && !loading" class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+          <line x1="9" y1="9" x2="9.01" y2="9"></line>
+          <line x1="15" y1="9" x2="15.01" y2="9"></line>
+        </svg>
+        <h3>No meals found</h3>
+        <p>Try adjusting your search or filter to find what you're looking for</p>
+        <button class="btn btn-primary" (click)="viewAllMeals()">View All Meals</button>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-wrapper" *ngIf="pagination.totalPages > 1">
+
+        <div class="pagination-info">
+          Showing {{ (currentPage - 1) * pageSize + 1 }}–{{ getPageEnd() }} of {{ pagination.total }} items
+        </div>
+
+        <div class="pagination-controls">
+
+          <!-- Prev button -->
+          <button class="page-btn page-nav" (click)="prevPage()" [disabled]="currentPage === 1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Prev
+          </button>
+
+          <!-- Page numbers -->
+          <ng-container *ngFor="let page of getPageNumbers()">
+            <span *ngIf="page === -1" class="page-ellipsis">...</span>
+            <button
+              *ngIf="page !== -1"
+              class="page-btn"
+              [class.active]="page === currentPage"
+              (click)="goToPage(page)">
+              {{ page }}
+            </button>
+          </ng-container>
+
+          <!-- Next button -->
+          <button class="page-btn page-nav" (click)="nextPage()" [disabled]="currentPage === pagination.totalPages">
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
