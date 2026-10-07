@@ -1,15 +1,13 @@
-// Prisma Schema for Takeoute Food Ordering App
+// Prisma Schema for Takeoute - PRODUCTION (PostgreSQL on Railway)
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-// Models
 
 model User {
   id        String   @id @default(uuid())
@@ -17,7 +15,7 @@ model User {
   email     String   @unique
   phone     String   @unique
   password  String
-  role      String   @default("CUSTOMER") // CUSTOMER, ADMIN, STAFF
+  role      String   @default("CUSTOMER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -68,9 +66,9 @@ model Order {
   subtotal        Float?
   deliveryFee     Float?
   total           Float
-  status          String   @default("PENDING") // PENDING, CONFIRMED, PREPARING, READY, OUT_FOR_DELIVERY, DELIVERED, CANCELLED
-  paymentMethod   String   @default("PAY_ON_DELIVERY") // PAY_ON_DELIVERY, BANK_TRANSFER
-  paymentStatus   String   @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  status          String   @default("PENDING")
+  paymentMethod   String   @default("PAY_ON_DELIVERY")
+  paymentStatus   String   @default("PENDING")
   deliveryAddress String
   deliveryArea    String?
   deliveryState   String?
