@@ -66,6 +66,10 @@ export class CheckoutComponent implements OnInit {
     this.loading = true;
     this.error = '';
 
+    // Open WhatsApp window IMMEDIATELY on user tap (before API call)
+    // This prevents browser popup blockers from blocking it
+    const whatsappWindow = window.open('', '_blank');
+
     const order: Order = {
       customerName: this.customerName,
       customerPhone: this.customerPhone,
@@ -86,18 +90,20 @@ export class CheckoutComponent implements OnInit {
         if (response.success) {
           // Clear cart
           this.cartService.clearCart();
-          
+
           // Show success modal
           this.modalService.success(
             'Order Placed Successfully!',
-            `Your order #${response.data.orderNumber} has been confirmed. Check WhatsApp for details.`
+            `Your order #${response.data.orderNumber} has been confirmed. Redirecting to WhatsApp...`
           );
-          
-          // Open WhatsApp
-          if (response.data.whatsappUrl) {
-            window.open(response.data.whatsappUrl, '_blank');
+
+          // Navigate the already-opened window to WhatsApp URL
+          if (response.data.whatsappUrl && whatsappWindow) {
+            whatsappWindow.location.href = response.data.whatsappUrl;
+          } else if (whatsappWindow) {
+            whatsappWindow.close();
           }
-          
+
           // Redirect to home after 2 seconds
           setTimeout(() => {
             this.router.navigate(['/']);
@@ -106,6 +112,10 @@ export class CheckoutComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
+        // Close the blank window if API fails
+        if (whatsappWindow) {
+          whatsappWindow.close();
+        }
         this.error = err.error?.message || 'Failed to place order. Please try again.';
         this.modalService.error(
           'Order Failed',
