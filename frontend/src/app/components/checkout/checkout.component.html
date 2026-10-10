@@ -58,15 +58,15 @@
 
           <!-- Delivery Information -->
           <div class="form-card">
-            <h2 class="card-title">Delivery Information</h2>
+            <h2 class="card-title">Pickup Information</h2>
             
             <div class="form-group">
-              <label for="address">Delivery Address <span class="required">*</span></label>
+              <label for="address">Your Address <span class="required">*</span></label>
               <textarea 
                 id="address" 
                 [(ngModel)]="deliveryAddress" 
                 name="address"
-                placeholder="Enter your complete delivery address"
+                placeholder="Enter your address so we can confirm your order"
                 rows="3"
                 required
               ></textarea>
@@ -102,8 +102,8 @@
                     <line x1="1" y1="10" x2="23" y2="10"></line>
                   </svg>
                   <div class="option-text">
-                    <span class="option-title">Pay on Delivery</span>
-                    <span class="option-desc">Cash payment when delivered</span>
+                    <span class="option-title">Pay on Pickup</span>
+                    <span class="option-desc">Cash payment when you pick up</span>
                   </div>
                 </div>
                 <div class="checkmark"></div>
