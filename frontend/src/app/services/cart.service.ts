@@ -88,6 +88,12 @@ export class CartService {
     return this.cartItems.reduce((total, item) => total + (item.food.price * item.quantity), 0);
   }
 
+  readonly TAKEOUT_FEE = 500;
+
+  getCartGrandTotal(): number {
+    return this.getCartTotal() + this.TAKEOUT_FEE;
+  }
+
   clearCart(): void {
     this.cartItems = [];
     this.saveCart();

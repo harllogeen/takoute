@@ -12,7 +12,9 @@ import { Order, CartItem } from '../../models/food.model';
 })
 export class CheckoutComponent implements OnInit {
   cartItems: CartItem[] = [];
-  total = 0;
+  subtotal = 0;
+  takeoutFee = 500;
+  grandTotal = 0;
   loading = false;
   error = '';
 
@@ -32,7 +34,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
-    this.total = this.cartService.getCartTotal();
+    this.subtotal = this.cartService.getCartTotal();
+    this.grandTotal = this.cartService.getCartGrandTotal();
 
     if (this.cartItems.length === 0) {
       this.modalService.warning(
@@ -77,7 +80,7 @@ export class CheckoutComponent implements OnInit {
       deliveryAddress: this.deliveryAddress,
       notes: this.notes,
       paymentMethod: this.paymentMethod,
-      totalAmount: this.total,
+      totalAmount: this.grandTotal,
       items: this.cartItems.map(item => ({
         foodId: item.food.id,
         quantity: item.quantity,

@@ -11,7 +11,9 @@ import { CartItem } from '../../models/food.model';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
-  total = 0;
+  subtotal = 0;
+  takeoutFee = 500;
+  grandTotal = 0;
 
   constructor(
     private cartService: CartService,
@@ -22,7 +24,8 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.cart$.subscribe(() => {
       this.cartItems = this.cartService.getCartItems();
-      this.total = this.cartService.getCartTotal();
+      this.subtotal = this.cartService.getCartTotal();
+      this.grandTotal = this.cartService.getCartGrandTotal();
     });
   }
 
