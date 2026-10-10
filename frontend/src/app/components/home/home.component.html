@@ -351,17 +351,3 @@
   </section>
 </div>
 
-
-<!-- Floating Cart Bar (mobile only, shows when cart has items) -->
-<div class="floating-cart-bar" *ngIf="getCartCount() > 0" (click)="openCart()">
-  <div class="floating-cart-left">
-    <div class="floating-cart-badge">{{ getCartCount() }}</div>
-    <span class="floating-cart-label">View Cart</span>
-  </div>
-  <div class="floating-cart-right">
-    <span class="floating-cart-total">₦{{ getCartTotal() | number:'1.0-0' }}</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-  </div>
-</div>

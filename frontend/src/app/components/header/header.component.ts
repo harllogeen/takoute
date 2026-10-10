@@ -11,6 +11,7 @@ import { ModalService } from '../../services/modal.service';
 })
 export class HeaderComponent implements OnInit {
   cartCount = 0;
+  cartBounce = false;
 
   constructor(
     private cartService: CartService,
@@ -21,7 +22,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe(() => {
-      this.cartCount = this.cartService.getCartCount();
+      const newCount = this.cartService.getCartCount();
+      if (newCount > this.cartCount) {
+        // Trigger bounce animation on add
+        this.cartBounce = false;
+        setTimeout(() => this.cartBounce = true, 10);
+        setTimeout(() => this.cartBounce = false, 400);
+      }
+      this.cartCount = newCount;
     });
   }
 

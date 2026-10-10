@@ -151,18 +151,8 @@ export class HomeComponent implements OnInit {
 
   addToCart(food: Food): void {
     this.cartService.addToCart(food);
-    
-    // Show notification toast
     this.showAddedNotification(food.name);
-    
-    // On mobile: DON'T auto-open cart — user can tap the floating cart bar
-    // On desktop: open sidebar after a short delay
-    const isMobile = window.innerWidth < 768;
-    if (!isMobile) {
-      setTimeout(() => {
-        this.cartSidebarService.open();
-      }, 800);
-    }
+    // No auto-open — user taps the cart icon in the header when ready
   }
 
   private showAddedNotification(foodName: string): void {
@@ -175,17 +165,16 @@ export class HomeComponent implements OnInit {
         </svg>
       </div>
       <div class="toast-content">
-        <div class="toast-title">Added to cart</div>
-        <div class="toast-message">${foodName}</div>
+        <div class="toast-title">${foodName} added</div>
+        <div class="toast-message">Tap the cart icon to view</div>
       </div>
     `;
     document.body.appendChild(notification);
-    
     setTimeout(() => notification.classList.add('show'), 10);
     setTimeout(() => {
       notification.classList.remove('show');
       setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }, 2500);
   }
 
   getImageUrl(food: Food): string {
