@@ -62,15 +62,19 @@
     }
   }
 
-  /* Drag handle pill on mobile */
-  .cart-sidebar::before {
-    content: '';
+  /* Drag handle pill on mobile — using a real HTML element instead */
+}
+
+.drag-handle {
+  display: none; /* hidden on desktop */
+
+  @media (max-width: 767px) {
     display: block;
     width: 40px;
     height: 4px;
     background: #D1D5DB;
     border-radius: 2px;
-    margin: 10px auto 0;
+    margin: 10px auto 4px;
     flex-shrink: 0;
   }
 }
