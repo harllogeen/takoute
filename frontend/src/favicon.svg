@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#10B981"/>
+  
+  <!-- Bowl base -->
+  <ellipse cx="64" cy="75" rx="35" ry="8" fill="#DC2626"/>
+  
+  <!-- Bowl rim -->
+  <path d="M 29 75 Q 29 55 64 55 Q 99 55 99 75" fill="#EF4444" stroke="#DC2626" stroke-width="2"/>
+  
+  <!-- Food in bowl (abstract rice/soup) -->
+  <ellipse cx="64" cy="58" rx="28" ry="12" fill="#FEF3C7"/>
+  
+  <!-- Steam lines -->
+  <path d="M 50 45 Q 48 35 50 30" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M 64 42 Q 64 32 64 27" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M 78 45 Q 80 35 78 30" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+  
+  <!-- Spoon accent -->
+  <ellipse cx="85" cy="68" rx="6" ry="4" fill="#FBBF24" opacity="0.9"/>
+  <rect x="88" y="65" width="3" height="15" rx="1.5" fill="#FBBF24" opacity="0.9" transform="rotate(25 89 72)"/>
+</svg>

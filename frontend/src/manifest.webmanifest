@@ -1,77 +1,41 @@
 {
-  "name": "Takeoute - Nigerian Food Ordering",
+  "name": "Takeoute - Nigerian Food Delivery",
   "short_name": "Takeoute",
-  "description": "Order delicious Nigerian food for pickup - fast, fresh, anytime.",
-  "theme_color": "#00A651",
-  "background_color": "#00A651",
-  "display": "standalone",
-  "scope": "/",
+  "description": "Order delicious Nigerian food for takeout - Jollof Rice, Egusi Soup, Suya and more",
   "start_url": "/",
-  "orientation": "portrait",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10B981",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "assets/icons/icon-72x72.svg",
-      "sizes": "72x72",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/icon-96x96.svg",
-      "sizes": "96x96",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/icon-128x128.svg",
-      "sizes": "128x128",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/icon-144x144.svg",
-      "sizes": "144x144",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/icon-152x152.svg",
-      "sizes": "152x152",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/icon-192x192.svg",
+      "src": "favicon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/icons/icon-384x384.svg",
-      "sizes": "384x384",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/icon-512x512.svg",
+      "src": "favicon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
+  "categories": ["food", "lifestyle"],
   "shortcuts": [
     {
-      "name": "Order Food",
-      "short_name": "Order",
-      "description": "Browse our menu and place an order",
+      "name": "Menu",
+      "short_name": "Menu",
+      "description": "Browse food menu",
       "url": "/",
-      "icons": [{ "src": "assets/icons/icon-96x96.svg", "sizes": "96x96" }]
+      "icons": [{ "src": "favicon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Checkout",
-      "short_name": "Checkout",
-      "description": "Complete your order",
-      "url": "/checkout",
-      "icons": [{ "src": "assets/icons/icon-96x96.svg", "sizes": "96x96" }]
+      "name": "Cart",
+      "short_name": "Cart",
+      "description": "View your cart",
+      "url": "/cart",
+      "icons": [{ "src": "favicon-192.png", "sizes": "192x192" }]
     }
   ]
 }
