@@ -31,7 +31,8 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# Prisma
+# Prisma - schema.prisma is local-only; production uses schema.production.prisma
+prisma/schema.prisma
 prisma/migrations/
 
 # Testing
