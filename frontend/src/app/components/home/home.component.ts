@@ -152,7 +152,14 @@ export class HomeComponent implements OnInit {
   addToCart(food: Food): void {
     this.cartService.addToCart(food);
     this.showAddedNotification(food.name);
-    // No auto-open — user taps the cart icon in the header when ready
+
+    // On desktop: auto-open cart sidebar. On mobile: user taps cart icon.
+    const isMobile = window.innerWidth < 768;
+    if (!isMobile) {
+      setTimeout(() => {
+        this.cartSidebarService.open();
+      }, 600);
+    }
   }
 
   private showAddedNotification(foodName: string): void {
