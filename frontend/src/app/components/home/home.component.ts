@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   searchTerm: string = '';
   loading = false;
   error = '';
+  cartCount = 0;
+  cartSubtotal = 0;
 
   // Pagination
   currentPage = 1;
@@ -48,6 +50,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
     this.loadFoods();
+
+    // Track cart for floating bar
+    this.cartService.cart$.subscribe(cart => {
+      this.cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      this.cartSubtotal = cart.reduce((sum, item) => sum + item.food.price * item.quantity, 0);
+    });
   }
 
   loadCategories(): void {
@@ -144,13 +152,17 @@ export class HomeComponent implements OnInit {
   addToCart(food: Food): void {
     this.cartService.addToCart(food);
     
-    // Show notification
+    // Show notification toast
     this.showAddedNotification(food.name);
     
-    // Open cart sidebar after a short delay
-    setTimeout(() => {
-      this.cartSidebarService.open();
-    }, 800);
+    // On mobile: DON'T auto-open cart — user can tap the floating cart bar
+    // On desktop: open sidebar after a short delay
+    const isMobile = window.innerWidth < 768;
+    if (!isMobile) {
+      setTimeout(() => {
+        this.cartSidebarService.open();
+      }, 800);
+    }
   }
 
   private showAddedNotification(foodName: string): void {
@@ -283,5 +295,17 @@ export class HomeComponent implements OnInit {
   // Page end for display
   getPageEnd(): number {
     return Math.min(this.currentPage * this.pageSize, this.pagination.total);
+  }
+
+  getCartCount(): number {
+    return this.cartCount;
+  }
+
+  getCartTotal(): number {
+    return this.cartSubtotal;
+  }
+
+  openCart(): void {
+    this.cartSidebarService.open();
   }
 }
